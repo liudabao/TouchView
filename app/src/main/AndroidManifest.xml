@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lenovo.touchview">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+=======
+
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

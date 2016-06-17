@@ -1,12 +1,16 @@
 package com.example.lenovo.touchview;
 
+<<<<<<< HEAD
 import android.graphics.PixelFormat;
+=======
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
+<<<<<<< HEAD
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +19,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+=======
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +35,29 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager mLinearLayoutManager;
     RecyclerViewAdapter mAdapter;
     List<String> data;
+<<<<<<< HEAD
     //定义浮动窗口布局
     RelativeLayout mFloatLayout;
     WindowManager.LayoutParams wmParams;
     //创建浮动窗口设置布局参数的对象
     WindowManager mWindowManager;
+=======
+
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
     PopupWindow mPopupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
        // initData();
        // initView();
        // initPopuptWindow();
+=======
+        initData();
+        initView();
+        initPopuptWindow();
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
     }
 
     private void initView(){
@@ -52,20 +72,31 @@ public class MainActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if(newState==RecyclerView.SCROLL_STATE_IDLE){
+<<<<<<< HEAD
                    // mPopupWindow.dismiss();
                     Log.e("view","top "+newState);
+=======
+                    mPopupWindow.dismiss();
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+<<<<<<< HEAD
                 Log.e("view","scroll "+mRecyclerView.getScrollState()+" "+dy+" "+dx);
                 if(dy>0||dx>0&&mLinearLayoutManager.findFirstVisibleItemPosition()==0){
                     Log.e("view","scroll "+mRecyclerView.getScrollState()+" "+dy+" "+dx);
 
                     mPopupWindow.showAtLocation(recyclerView, Gravity.TOP, 100, 100);
                    // createFloatView();
+=======
+                if(mLinearLayoutManager.findFirstVisibleItemPosition()==0){
+                    Log.e("view","top "+mRecyclerView.getScrollState());
+                    mPopupWindow.showAtLocation(recyclerView, Gravity.TOP,0,0);
+
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
                 }
             }
         });
@@ -86,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 false);
         // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
         mPopupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT, true);
+<<<<<<< HEAD
         int[] location=  new int[2];
         mRecyclerView.getLocationOnScreen(location);
 
@@ -123,4 +155,12 @@ public class MainActivity extends AppCompatActivity {
         //添加mFloatLayout
         mWindowManager.addView(mFloatLayout, wmParams);
     }
+=======
+
+
+
+    }
+
+
+>>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
 }
