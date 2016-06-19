@@ -7,11 +7,8 @@ android {
     defaultConfig {
         applicationId "com.example.lenovo.touchview"
         minSdkVersion 23
-<<<<<<< HEAD
         targetSdkVersion 21
-=======
         targetSdkVersion 23
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
         versionCode 1
         versionName "1.0"
     }

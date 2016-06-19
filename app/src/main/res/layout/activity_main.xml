@@ -4,20 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<<<<<<< HEAD
     <com.example.lenovo.touchview.TouchView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-=======
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< HEAD
-        android:visibility="gone"
-=======
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
         android:overScrollMode="never">
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

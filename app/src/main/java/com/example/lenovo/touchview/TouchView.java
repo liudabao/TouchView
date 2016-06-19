@@ -1,16 +1,15 @@
 package com.example.lenovo.touchview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
-<<<<<<< HEAD
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-=======
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,7 +21,7 @@ import android.view.View;
 public class TouchView extends View {
     private Paint paint;
     private Path path;
-    private int alpha=10;
+    private int alpha;
     private Point center;
     private Point start;
     private Point end;
@@ -30,12 +29,12 @@ public class TouchView extends View {
     private int y;
     private int moveX=0;
     private int moveY=0;
-<<<<<<< HEAD
     public int startX;
     public int startY;
     private boolean flag=true;
-=======
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
+    private  int radius;
+    private int color;
+    private int speed;
 
     public TouchView(Context context) {
         this(context, null);
@@ -47,16 +46,18 @@ public class TouchView extends View {
 
     public TouchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        TypedArray array=context.obtainStyledAttributes(attrs, R.styleable.TouchView, defStyleAttr, 0);
+        alpha=array.getDimensionPixelSize(R.styleable.TouchView_alpha,0);
+        color=array.getColor(R.styleable.TouchView_viewColor, Color.GREEN);
+        radius=array.getDimensionPixelSize(R.styleable.TouchView_yPosition,0);
+        speed=array.getInt(R.styleable.TouchView_viewSpeed, 5);
+        paint=new Paint();
+       // init();
     }
 
     private void init(){
-        paint=new Paint();
-        path=new Path();
-        paint.setStyle(Paint.Style.FILL);
 
-        paint.setColor(Color.BLUE);
-<<<<<<< HEAD
+
        // paint.setAlpha(alpha);
 
     }
@@ -66,59 +67,47 @@ public class TouchView extends View {
         this.startY=startY;
     }
 
-
-    @Override
-    public void onSizeChanged(int x, int y, int oldw, int oldh){
-
-        start=new Point(startX, startY);
-        end=new Point(startX+getWidth(), startY);
-        center=new Point(getWidth()/2, 0);
-=======
-        paint.setAlpha(alpha);
-
-    }
-
     @Override
     public void onSizeChanged(int x, int y, int oldw, int oldh){
 
         start=new Point(0, 0);
         end=new Point(getWidth(), 0);
-        center=new Point(getWidth()/2, getHeight()/10);
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
+        center=new Point(getWidth()/2, 0);
     }
 
     @Override
     public void onDraw(Canvas canvas){
 
-<<<<<<< HEAD
+        if (alpha<100&&flag){
+            alpha++;
+        }
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(color);
         paint.setAlpha(alpha);
-=======
-        if(alpha<80){
-            alpha=alpha+5;
-            paint.setAlpha(alpha);
-        }
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
-        center.x=getWidth()/2+moveX;
-        if(moveY>getHeight()/2){
-            moveY=getHeight()/2;
-        }
-<<<<<<< HEAD
-
-       // Log.e("center",center.x+" "+center.y);
+        path=new Path();
         if(flag){
-            center.y=0+moveY;
+            center.y=radius;
+            path.moveTo(start.x, start.y);
+            path.quadTo(center.x, center.y, end.x, end.y);
+            canvas.drawPath(path, paint);
         }
-        path.moveTo(start.x, start.y);
-        path.quadTo(center.x, center.y, end.x, end.y);
-        canvas.drawPath(path, paint);
+        else {
+            if(radius>0){
+              //  Log.e("center",center.x+" "+center.y);
+                if(alpha>30){
+                    alpha--;
+                }
+                radius=radius-speed;
+                center.y=radius;
+                path.moveTo(start.x, start.y);
+                path.quadTo(center.x, center.y, end.x, end.y);
+                canvas.drawPath(path, paint);
+            }
 
-=======
-        center.y=getHeight()/10+moveY;
-       // Log.e("center",center.x+" "+center.y);
-        path.moveTo(start.x, start.y);
-        path.quadTo(center.x, center.y, end.x, end.y);
-        canvas.drawPath(path, paint);
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
+        }
+      //  Log.e("alpha",paint.getAlpha()+"");
+        invalidate();
+
     }
 
     @Override
@@ -126,42 +115,20 @@ public class TouchView extends View {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-<<<<<<< HEAD
-                alpha=10;
+                alpha=0;
+                radius=0;
                 flag=true;
                 x= (int) event.getX();
                 y= (int) event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                 if(alpha<70){
-                     alpha=alpha+3;
-                 }
                 moveX=(int) event.getX()-x;
                 moveY=(int)event.getY()-y;
-                invalidate();
+                radius=moveY;
                 break;
             case MotionEvent.ACTION_UP:
                 flag=false;
-                //path.reset();
-                while(center.y>0){
-                    center.y=center.y-1;
-                    invalidate();
-                }
                 break;
-=======
-                x= (int) event.getX();
-                y= (int) event.getY();
-                alpha=10;
-            case MotionEvent.ACTION_MOVE:
-
-
-                moveX=(int) event.getX()-x;
-                moveY=(int)event.getY()-y;
-                path.reset();
-                invalidate();
-                break;
-
->>>>>>> 9d377006e517cfae9af4d17494fa392c538bcf72
 
         }
         return  true;
