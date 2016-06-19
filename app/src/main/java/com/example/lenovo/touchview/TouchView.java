@@ -48,7 +48,7 @@ public class TouchView extends View {
         super(context, attrs, defStyleAttr);
         TypedArray array=context.obtainStyledAttributes(attrs, R.styleable.TouchView, defStyleAttr, 0);
         alpha=array.getDimensionPixelSize(R.styleable.TouchView_alpha,0);
-        color=array.getColor(R.styleable.TouchView_viewColor, Color.GREEN);
+        color=array.getColor(R.styleable.TouchView_viewColor, Color.BLUE);
         radius=array.getDimensionPixelSize(R.styleable.TouchView_yPosition,0);
         speed=array.getInt(R.styleable.TouchView_viewSpeed, 5);
         paint=new Paint();
@@ -97,7 +97,7 @@ public class TouchView extends View {
                 if(alpha>30){
                     alpha--;
                 }
-                radius=radius-speed;
+                radius=radius-speed*3;
                 center.y=radius;
                 path.moveTo(start.x, start.y);
                 path.quadTo(center.x, center.y, end.x, end.y);
@@ -116,7 +116,7 @@ public class TouchView extends View {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 alpha=0;
-                radius=0;
+                radius=30;
                 flag=true;
                 x= (int) event.getX();
                 y= (int) event.getY();
@@ -125,6 +125,13 @@ public class TouchView extends View {
                 moveX=(int) event.getX()-x;
                 moveY=(int)event.getY()-y;
                 radius=moveY;
+                if(moveY>getHeight()){
+                    radius=getHeight();
+                }
+                else if(moveY<0){
+                    radius=0;
+                }
+
                 break;
             case MotionEvent.ACTION_UP:
                 flag=false;

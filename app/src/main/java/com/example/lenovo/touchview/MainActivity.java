@@ -66,10 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if(newState==RecyclerView.SCROLL_STATE_IDLE){
 
-                   // mPopupWindow.dismiss();
                     Log.e("view","top "+newState);
-
-                  //  mWindowManager.removeView(view);
+                    //mWindowManager.removeView(view);
 
                 }
             }
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 Log.e("view", "scroll " + mRecyclerView.getScrollState() + " " + dy + " " + dx);
-                if (dy > 0 || dx > 0 && mLinearLayoutManager.findFirstVisibleItemPosition() == 0) {
+                if (mLinearLayoutManager.findFirstVisibleItemPosition() == 0) {
                     Log.e("view", "scroll " + mRecyclerView.getScrollState() + " " + dy + " " + dx);
                     createFloatView();
 
@@ -109,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
         //调整悬浮窗显示的停靠位置为左侧置顶
         wmParams.gravity = Gravity.TOP;
         // 以屏幕左上角为原点，设置x、y初始值，相对于gravity
-        wmParams.x = 0;
-        wmParams.y = 0;
+        int []location=new int[2];
+        mRecyclerView.getLocationInWindow(location);
+        wmParams.x = location[0];
+        wmParams.y = location[1]-72;
 
         //设置悬浮窗口长宽数据
         wmParams.width = WindowManager.LayoutParams.MATCH_PARENT;
